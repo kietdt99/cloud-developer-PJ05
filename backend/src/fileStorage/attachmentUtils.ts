@@ -23,7 +23,7 @@ export class AttachmentUtils {
     })
   }
 
-  async downloadImage(musicId: string): Promise<string> {
+  downloadImage = (musicId: string): string => {
     return this.s3.getSignedUrl('getObject', { Bucket: this.bucketName, Key: musicId })
   }
 }

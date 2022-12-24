@@ -86,7 +86,7 @@ export async function generateAttachmentUrl(id: string): Promise<string> {
   return await attachmentUtil.getUploadUrl(id)
 }
 
-export async function downloadMusicImage(musicId: string): Promise<string> {
+export const downloadMusicImage = (musicId: string): string => {
   logger.info('Starting download image with musicId: ', musicId)
   return attachmentUtil.downloadImage(musicId)
 }
