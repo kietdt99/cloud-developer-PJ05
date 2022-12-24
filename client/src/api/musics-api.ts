@@ -73,7 +73,7 @@ export async function uploadFile(uploadUrl: string, file: Buffer): Promise<void>
 }
 
 export async function downloadImage(idToken: string, musicId: string): Promise<any> {
-  const response = await Axios.get(`${apiEndpoint}/musics/${musicId}`, {
+  const response = await Axios.get(`${apiEndpoint}/musics/imagedownload/${musicId}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${idToken}`

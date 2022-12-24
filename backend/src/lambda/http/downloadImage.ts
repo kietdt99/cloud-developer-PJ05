@@ -2,7 +2,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import 'source-map-support/register'
 import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
-import { downloadMusicImage, getMusicById } from '../../businessLogic/musics'
+import { getMusicById } from '../../businessLogic/musics'
 import { createLogger } from '../../utils/logger'
 
 const logger = createLogger('GetImageHandler')
@@ -19,7 +19,7 @@ export const handler = middy(async (event: APIGatewayProxyEvent): Promise<APIGat
     const music = getMusicById(musicId)
     return {
       statusCode: 200,
-      body: JSON.stringify({ item: music?.attachmentUrl })
+      body: JSON.stringify({ item: music })
     }
   }
 )

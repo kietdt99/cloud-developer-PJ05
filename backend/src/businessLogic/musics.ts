@@ -13,12 +13,12 @@ const musicsAccess = new MusicsAccess()
 const attachmentUtil = new AttachmentUtils()
 
 export async function getMusics(userId: string) {
-  logger.info(`Retrieving all musics for user ${userId}`, { userId })
+  logger.info(`Retrieving all musics for user ${userId}`)
   return await musicsAccess.getAllMusics(userId)
 }
 
 export async function getMusicById(musicId: string) {
-  logger.info(`Retrieving music by ${musicId}`, { musicId })
+  logger.info(`Retrieving music by ${musicId}`)
   return await musicsAccess.getMusicById(musicId)
 }
 

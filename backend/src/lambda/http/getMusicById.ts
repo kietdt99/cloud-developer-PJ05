@@ -5,7 +5,6 @@ import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
 
 import { getMusicById } from '../../businessLogic/musics'
-import { getUserId } from '../utils';
 
 const logger = createLogger('GetImageHandler')
 
