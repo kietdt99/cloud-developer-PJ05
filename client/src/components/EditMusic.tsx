@@ -73,26 +73,59 @@ export class EditMusic extends React.PureComponent<
   render() {
     return (
       <div>
-        <h1>Upload new image</h1>
+        <div>
+          <h1>Update new music name</h1>
+          
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Field>
+              <input
+                type="text"
+                placeholder="Music name..."
+                onChange={this.handleFileChange}
+              />
+            </Form.Field>
 
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <label>File</label>
-            <input
-              type="file"
-              accept="image/*"
-              placeholder="Image to upload"
-              onChange={this.handleFileChange}
-            />
-          </Form.Field>
+            {this.renderUpdateButton()}
+          </Form>
+        </div>
+        <div>
+          <h1>Upload new image</h1>
 
-          {this.renderButton()}
-        </Form>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Field>
+              <label>File</label>
+              <input
+                type="file"
+                accept="image/*"
+                placeholder="Image to upload"
+                onChange={this.handleFileChange}
+              />
+            </Form.Field>
+
+            {this.renderUploadButton()}
+          </Form>
+        </div>
       </div>
     )
   }
 
-  renderButton() {
+  renderUpdateButton() {
+
+    return (
+      <div>
+        {this.state.uploadState === UploadState.FetchingPresignedUrl && <p>Uploading image metadata</p>}
+        {this.state.uploadState === UploadState.UploadingFile && <p>Uploading file</p>}
+        <Button
+          loading={this.state.uploadState !== UploadState.NoUpload}
+          type="submit"
+        >
+          Update
+        </Button>
+      </div>
+    )
+  }
+
+  renderUploadButton() {
 
     return (
       <div>
