@@ -18,7 +18,7 @@ export const handler = middy(async (event: APIGatewayProxyEvent): Promise<APIGat
         body: JSON.stringify({ error: 'Invalid musicId param' })
       }
     }
-    logger.info(getImageHandler receives request to download image with musicId: ${musicId})
+    logger.info(`getImageHandler receives request to download image with musicId: ${musicId}`)
     const image = await getMusics(getUserId(event))
     return {
       statusCode: 200,
