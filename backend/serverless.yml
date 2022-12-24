@@ -234,6 +234,22 @@ functions:
           - dynamodb:Query
           - dynamodb:Scan
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.MUSICS_TABLE}/index/${self:provider.environment.INDEX_USER}
+  
+  downloadImage:
+    handler: src/lambda/http/downloadImage.handler
+    events:
+      - http:
+          method: get
+          path: musics/{musicId}
+          cors: true
+          authorizer: Auth
+    iamRoleStatementsInherit: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:GetObject
+          - s3:HeadObject
+        Resource: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*
 
 resources:
   Resources:
