@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "group",
+  "type": "object",
+  "properties": {
+    "musicName": {
+      "type": "string",
+      "default": "untitled",
+      "pattern": "^[^-\\s][a-zA-Z0-9_\\s-]+$",
+      "minLength": 1
+    },
+    "dueDate": {
+      "type": "string"
+    },
+    "done": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "musicName",
+    "dueDate",
+    "done"
+  ],
+  "additionalProperties": false
+}
