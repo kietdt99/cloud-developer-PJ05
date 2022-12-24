@@ -71,3 +71,13 @@ export async function getUploadUrl(
 export async function uploadFile(uploadUrl: string, file: Buffer): Promise<void> {
   await Axios.put(uploadUrl, file)
 }
+
+export async function downloadImage(idToken: string, musicId: string): Promise<any> {
+  const response = await Axios.get(`${apiEndpoint}/musics/${musicId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${idToken}`
+    }
+  })
+  return response.data.item
+}

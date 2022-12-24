@@ -14,7 +14,7 @@ import {
   Loader
 } from 'semantic-ui-react'
 
-import { createMusic, deleteMusic, getMusics, patchMusic } from '../api/musics-api'
+import { createMusic, deleteMusic, getMusics, patchMusic, downloadImage } from '../api/musics-api'
 import Auth from '../auth/Auth'
 import { Music } from '../types/Music'
 
@@ -73,6 +73,18 @@ export class Musics extends React.PureComponent<MusicsProps, MusicsState> {
       })
     } catch {
       alert('Music deletion failed')
+    }
+  }
+
+  onMusicDownloadImage = async (musicId: string) => {
+    try {
+      const url = await downloadImage(this.props.auth.getIdToken(), musicId)
+      console.log(url)
+      const newWindow = window.open(url, '_blank', 'noopener, noreferrer')
+      if (newWindow) newWindow.opener = null
+      return newWindow
+    } catch {
+      alert('Download image failed')
     }
   }
 
@@ -198,8 +210,17 @@ export class Musics extends React.PureComponent<MusicsProps, MusicsState> {
                 </Button>
               </Grid.Column>
               {music.attachmentUrl && (
-                <Image src={music.attachmentUrl} size="small" wrapped />
+                <Image src={music.attachmentUrl} size="medium" wrapped />
               )}
+              <Grid.Column width={1}>
+                <Button
+                  icon
+                  color="green"
+                  onClick={() => this.onMusicDownloadImage(music.musicId)}
+                >
+                  <Icon name="download" />
+                </Button>
+              </Grid.Column>
               <Grid.Column width={16}>
                 <Divider />
               </Grid.Column>
