@@ -82,6 +82,7 @@ functions:
           path: musics/{musicId}
           cors: true
           authorizer: Auth
+    iamRoleStatementsInherit: true
     iamRoleStatements:
     - Effect: Allow
       Action:
@@ -97,7 +98,12 @@ functions:
         - dynamodb:Query
         - dynamodb:Scan
         - dynamodb:GetItem
-      Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.MUSICS_TABLE}/index/${self:provider.environment.INDEX_USER}    
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.MUSICS_TABLE}/index/${self:provider.environment.INDEX_USER}
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+        - s3:HeadObject
+      Resource: "arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*"    
 
   # Provide iamRoleStatements property. Decide the Actions and AWS Resource. 
   # To refer to an AWS resource defined in the "Resources" section, you can use "Resource: !GetAtt <resource-name>.Arn"
@@ -240,7 +246,7 @@ functions:
     events:
       - http:
           method: get
-          path: musics/{musicId}
+          path: musics/imagedownload/{musicId}
           cors: true
           authorizer: Auth
     iamRoleStatementsInherit: true

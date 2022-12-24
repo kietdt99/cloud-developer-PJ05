@@ -17,9 +17,8 @@ export async function getMusics(userId: string) {
   return await musicsAccess.getAllMusics(userId)
 }
 
-export async function getMusicById(userId: string, musicId: string) {
+export async function getMusicById(musicId: string) {
   logger.info(`Retrieving music by ${musicId}`, { musicId })
-  await checkMusic(userId, musicId)
   return await musicsAccess.getMusicById(musicId)
 }
 
