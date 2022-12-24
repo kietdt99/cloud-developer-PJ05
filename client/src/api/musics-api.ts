@@ -3,6 +3,7 @@ import { Music } from '../types/Music';
 import { CreateMusicRequest } from '../types/CreateMusicRequest';
 import Axios from 'axios'
 import { UpdateMusicRequest } from '../types/UpdateMusicRequest';
+import { Musics } from '../components/Musics';
 
 export async function getMusics(idToken: string): Promise<Music[]> {
   console.log('Fetching musics')
@@ -73,11 +74,14 @@ export async function uploadFile(uploadUrl: string, file: Buffer): Promise<void>
 }
 
 export async function downloadImage(idToken: string, musicId: string): Promise<any> {
-  const response = await Axios.get(`${apiEndpoint}/musics/imagedownload/${musicId}`, {
+  const response = await Axios.get(`${apiEndpoint}/musics/${musicId}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${idToken}`
     }
   })
-  return response.data.item
+  console.log(response.data.item)
+  const res = response.data.item.filter((item: Music) => item.musicId === musicId)
+  console.log(res)
+  return res[0]?.attachmentUrl
 }
