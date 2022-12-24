@@ -13,8 +13,13 @@ const musicsAccess = new MusicsAccess()
 const attachmentUtil = new AttachmentUtils()
 
 export async function getMusics(userId: string) {
-  logger.info(`Retrieving all musics for user ${userId}`, { userId })
+  logger.info(`Retrieving all musics for user ${userId}`)
   return await musicsAccess.getAllMusics(userId)
+}
+
+export async function getMusicById(musicId: string) {
+  logger.info(`Retrieving music by ${musicId}`)
+  return await musicsAccess.getMusicById(musicId)
 }
 
 export async function createMusic(
@@ -78,4 +83,9 @@ export async function updateAttachmentUrl(
 
 export async function generateAttachmentUrl(id: string): Promise<string> {
   return await attachmentUtil.getUploadUrl(id)
+}
+
+export const downloadMusicImage = (musicId: string): string => {
+  logger.info('Starting download image with musicId: ', musicId)
+  return attachmentUtil.downloadImage(musicId)
 }

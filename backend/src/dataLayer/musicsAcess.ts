@@ -43,7 +43,22 @@ export class MusicsAccess {
   
       return result.Items as MusicItem[]
     }
+
+    async getMusicById(musicId: string): Promise<MusicItem[]> {
+      logger.info('Getting music by id')
+      const result = await this.docClient
+        .query({
+          TableName: this.musicsTable,
+          KeyConditionExpression: 'musicId = :musicId',
+          ExpressionAttributeValues: {
+            ':musicId': musicId
+          }
+        })
+        .promise()
   
+      return result.Items as MusicItem[]
+    }
+
     async createMusic(musicItem: MusicItem): Promise<MusicItem> {
       logger.info('Create a new music')
       await this.docClient
