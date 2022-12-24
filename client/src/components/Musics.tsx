@@ -58,7 +58,7 @@ export class Musics extends React.PureComponent<MusicsProps, MusicsState> {
         })
       }
       else {
-        alert('Music creation failed')
+        alert('Music creation failed, please input music name!')
       }
     } catch {
       alert('Music creation failed')
@@ -127,12 +127,12 @@ export class Musics extends React.PureComponent<MusicsProps, MusicsState> {
               color: 'teal',
               labelPosition: 'left',
               icon: 'add',
-              content: 'New task',
+              content: 'New music',
               onClick: this.onMusicCreate
             }}
             fluid
             actionPosition="left"
-            placeholder="To change the world..."
+            placeholder="Input music name..."
             onChange={this.handleNameChange}
           />
         </Grid.Column>
