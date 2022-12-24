@@ -121,7 +121,7 @@ export class Musics extends React.PureComponent<MusicsProps, MusicsState> {
   render() {
     return (
       <div>
-        <Header as="h1">MUSICS</Header>
+        <Header as="h1">MUSIC APPLICATION</Header>
 
         {this.renderCreateMusicInput()}
 
